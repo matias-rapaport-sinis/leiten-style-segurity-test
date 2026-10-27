@@ -1,0 +1,50 @@
+@page "/"
+@page "/oportunidades"
+
+@* Solo marcado y clases. La lógica está en Oportunidades.razor.cs y los estilos en
+   Oportunidades.razor.css. Los nombres de clase son el contrato con Marketing:
+   si se renombra una, avisar (o renombrarla también en el .css). *@
+
+<PageTitle>Oportunidades</PageTitle>
+
+<header class="encabezado">
+    <h1 class="titulo">Oportunidades</h1>
+    <input class="buscador" type="search" placeholder="Buscar cliente u obra…"
+           @bind="Busqueda" @bind:event="oninput" />
+</header>
+
+<section class="kpis">
+    <TarjetaKpi Titulo="Abiertas" Valor="@Abiertas.ToString()" />
+    <TarjetaKpi Titulo="Monto total" Valor="@Plata(MontoTotal)" Destacada="true" />
+</section>
+
+<table class="tabla">
+    <thead>
+        <tr>
+            <th>Cliente</th>
+            <th>Obra</th>
+            <th>Etapa</th>
+            <th class="num">Monto</th>
+            <th>Avance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var o in Filtradas)
+        {
+            <tr>
+                <td>@o.Cliente</td>
+                <td>@o.Obra</td>
+                <td><span class="etapa @ClaseEtapa(o.Etapa)">@NombreEtapa(o.Etapa)</span></td>
+                <td class="num">@Plata(o.Monto)</td>
+                @* Único style permitido en un .razor: pasar un valor dinámico como variable CSS.
+                   Cómo se dibuja la barra lo decide el .razor.css. *@
+                <td><div class="barra" style="--avance: @(o.Avance)%"><div class="barra__relleno"></div></div></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!Filtradas.Any())
+{
+    <p class="vacio">No hay oportunidades que coincidan con la búsqueda.</p>
+}

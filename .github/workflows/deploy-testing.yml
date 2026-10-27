@@ -1,0 +1,36 @@
+name: Deploy testing
+
+# Deploy DE MENTIRA, para el red team: no publica nada.
+# - Usa el environment "testing", que solo acepta la rama testing. Lanzado a mano
+#   (workflow_dispatch) desde otra rama, GitHub lo rechaza antes de entregar el secret.
+# - SECRETO_PRUEBA vive en ese environment (no a nivel repo). Nunca se imprime:
+#   el job solo muestra si llegó y su longitud.
+on:
+  push:
+    branches: [testing]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-testing
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: deploy-testing
+    runs-on: ubuntu-latest
+    environment: testing
+    steps:
+      - name: Verificar el secret (sin imprimirlo)
+        env:
+          SECRETO: ${{ secrets.SECRETO_PRUEBA }}
+        run: |
+          if [[ -n "$SECRETO" ]]; then
+              echo "SECRETO_PRUEBA presente (longitud ${#SECRETO})."
+          else
+              echo "::warning::SECRETO_PRUEBA no llegó a este job."
+          fi
+          echo "Rama: $GITHUB_REF_NAME · commit: $GITHUB_SHA · lanzado por: $GITHUB_ACTOR"
+          echo "(deploy simulado: no se publica nada)"

@@ -1,0 +1,53 @@
+/* Estructura general: menú lateral + contenido. Archivo de Marketing. */
+
+.pagina {
+    display: grid;
+    grid-template-columns: var(--ancho-lateral) 1fr;
+    min-height: 100vh;
+}
+
+.lateral {
+    background: var(--color-superficie);
+    border-right: 1px solid var(--color-borde);
+    padding: 24px 16px;
+}
+
+.logo {
+    display: block;
+    width: 120px;
+    margin-bottom: 32px;
+}
+
+/* NavLink es otro componente: el CSS aislado no le llega a su <a> sin ::deep. */
+.menu ::deep a {
+    display: block;
+    padding: 8px 12px;
+    border-radius: var(--radio);
+    color: var(--color-texto);
+    text-decoration: none;
+}
+
+.menu ::deep a:hover {
+    background: var(--color-fondo);
+}
+
+.menu ::deep a.active {
+    background: var(--color-marca);
+    color: var(--color-texto-sobre-marca);
+    font-weight: 600;
+}
+
+.contenido {
+    padding: 32px;
+}
+
+@media (max-width: 720px) {
+    .pagina {
+        grid-template-columns: 1fr;
+    }
+
+    .lateral {
+        border-right: none;
+        border-bottom: 1px solid var(--color-borde);
+    }
+}

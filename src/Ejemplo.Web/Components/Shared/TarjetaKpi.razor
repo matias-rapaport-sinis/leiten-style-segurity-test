@@ -1,0 +1,10 @@
+<div class="tarjeta @(Destacada ? "tarjeta--destacada" : "")">
+    <span class="tarjeta__titulo">@Titulo</span>
+    <strong class="tarjeta__valor">@Valor</strong>
+</div>
+
+@code {
+    [Parameter, EditorRequired] public string Titulo { get; set; } = "";
+    [Parameter, EditorRequired] public string Valor { get; set; } = "";
+    [Parameter] public bool Destacada { get; set; }
+}

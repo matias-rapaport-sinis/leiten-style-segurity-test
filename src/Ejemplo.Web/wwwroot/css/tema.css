@@ -1,0 +1,32 @@
+/* Tema de la aplicación: colores, tipografía y medidas.
+   Archivo principal de Marketing: cambiar un valor acá lo cambia en toda la app.
+   Los componentes usan estas variables desde sus *.razor.css. */
+
+:root {
+    /* Marca */
+    --color-marca:             #ffd257;
+    --color-marca-oscuro:      #e7b833;
+    --color-texto-sobre-marca: #1c1d21;
+
+    /* Interfaz */
+    --color-fondo:       #f4f5f8;
+    --color-superficie:  #ffffff;
+    --color-texto:       #1c1d21;
+    --color-texto-suave: #6b7280;
+    --color-borde:       #e7e9ee;
+
+    /* Estados */
+    --color-exito:  #16a34a;
+    --color-alerta: #d97706;
+    --color-info:   #2563eb;
+
+    /* Tipografía */
+    --fuente-base: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --tamano-base: 15px;
+
+    /* Formas y medidas */
+    --radio:          6px;
+    --radio-grande:   10px;
+    --sombra:         0 2px 8px rgba(0, 0, 0, .10);
+    --ancho-lateral:  220px;
+}

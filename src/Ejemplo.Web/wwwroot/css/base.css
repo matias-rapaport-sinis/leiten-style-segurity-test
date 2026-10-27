@@ -1,0 +1,27 @@
+/* Estilos globales (cuerpo, títulos, enlaces). Archivo de Marketing.
+   Lo específico de cada pantalla va en el .razor.css del componente, no acá. */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--color-fondo);
+    color: var(--color-texto);
+    font-family: var(--fuente-base);
+    font-size: var(--tamano-base);
+    line-height: 1.5;
+}
+
+h1,
+h2,
+h3 {
+    line-height: 1.2;
+}
+
+a {
+    color: inherit;
+}

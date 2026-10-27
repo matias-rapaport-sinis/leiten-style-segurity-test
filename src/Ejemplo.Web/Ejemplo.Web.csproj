@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Ejemplo.Web</RootNamespace>
+    <!-- Igual que en leiten-oportunidades: MapStaticAssets servía la variante .gz
+         vacía y el CSS quedaba sin aplicar. No re-activar sin resolver eso. -->
+    <CompressionEnabled>false</CompressionEnabled>
+  </PropertyGroup>
+
+</Project>

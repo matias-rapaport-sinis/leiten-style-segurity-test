@@ -1,0 +1,26 @@
+/* Tarjeta de indicador (KPI). Archivo de Marketing. */
+
+.tarjeta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 20px;
+    background: var(--color-superficie);
+    border: 1px solid var(--color-borde);
+    border-radius: var(--radio-grande);
+}
+
+.tarjeta--destacada {
+    background: var(--color-marca);
+    border-color: var(--color-marca-oscuro);
+    color: var(--color-texto-sobre-marca);
+}
+
+.tarjeta__titulo {
+    font-size: .85rem;
+    opacity: .75;
+}
+
+.tarjeta__valor {
+    font-size: 1.5rem;
+}

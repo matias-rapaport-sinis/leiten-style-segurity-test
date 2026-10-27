@@ -1,0 +1,39 @@
+{
+  "name": "Push: archivos de Desarrollo (Marketing)",
+  "target": "push",
+  "enforcement": "active",
+  "bypass_actors": [
+    {
+      "actor_id": 5,
+      "actor_type": "RepositoryRole",
+      "bypass_mode": "always"
+    }
+  ],
+  "rules": [
+    {
+      "type": "file_path_restriction",
+      "parameters": {
+        "restricted_file_paths": [
+          "**/*.config",
+          "**/*.cs",
+          "**/*.csproj",
+          "**/*.html",
+          "**/*.js",
+          "**/*.json",
+          "**/*.props",
+          "**/*.ps1",
+          "**/*.razor",
+          "**/*.sh",
+          "**/*.sln",
+          "**/*.targets",
+          "**/*.yaml",
+          "**/*.yml",
+          ".github/**/*",
+          "CLAUDE.md",
+          "configuracion-github/**/*",
+          "scripts/**/*"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+@inherits LayoutComponentBase
+
+<div class="pagina">
+    <aside class="lateral">
+        <img class="logo" src="img/logo.svg" alt="Leiten" />
+        <nav class="menu">
+            <NavLink href="oportunidades" Match="NavLinkMatch.Prefix">Oportunidades</NavLink>
+        </nav>
+    </aside>
+
+    <main class="contenido">
+        @Body
+    </main>
+</div>

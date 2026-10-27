@@ -1,0 +1,23 @@
+# Quién tiene que aprobar los cambios en cada ruta.
+# GitHub aplica la ÚLTIMA regla que coincide: lo general va arriba y lo específico abajo.
+# Solo tiene efecto con el ruleset "Ramas protegidas" activo (Require review from Code Owners);
+# ver configuracion-github/. Repo personal: los dueños son usuarios, no equipos, y cada
+# usuario listado necesita permiso de escritura en el repo (colaborador con rol Write o más).
+
+# Por defecto todo es de Desarrollo: lógica (.razor, .cs), datos, configuración y deploy.
+*                           @matias-rapaport-sinis
+
+# Estilos e imágenes: los aprueba Marketing (o Desarrollo).
+# Mantener alineado con .github/rutas-marketing.txt.
+# TODO: cuando exista la cuenta de Marketing de prueba, agregarla en estas tres líneas
+# (ej. "@matias-rapaport-sinis @usuario-marketing-prueba"). Así un PR de estilos lo puede
+# aprobar otra persona de Marketing; GitHub no cuenta la aprobación del propio autor.
+*.css                       @matias-rapaport-sinis
+/src/*/wwwroot/img/         @matias-rapaport-sinis
+/src/*/wwwroot/fonts/       @matias-rapaport-sinis
+
+# Las reglas de permisos son siempre de Desarrollo, aunque una regla de arriba coincida.
+/.github/                   @matias-rapaport-sinis
+/CLAUDE.md                  @matias-rapaport-sinis
+/scripts/                   @matias-rapaport-sinis
+/configuracion-github/      @matias-rapaport-sinis

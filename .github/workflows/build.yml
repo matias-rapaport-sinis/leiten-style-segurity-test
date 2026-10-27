@@ -1,0 +1,25 @@
+name: build
+
+# Compila la solución en cada PR y en cada push a main/testing.
+# El ruleset de ramas lo exige como check obligatorio (contexto "build").
+on:
+  pull_request:
+  push:
+    branches: [main, testing]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Compilar
+        run: dotnet build Ejemplo.sln --configuration Release

@@ -1,0 +1,44 @@
+name: Control de estilos y permisos
+
+# Corre en cada PR hacia testing/main (ver README.md).
+# - Si el autor del PR tiene rol "write" (Marketing): solo puede tocar las rutas de
+#   .github/rutas-marketing.txt y el PR tiene que ir a testing.
+# - Para todos: avisa si el PR agrega estilos dentro de un .razor (style="..." o <style>).
+#   En este proyecto es error por defecto (variable ESTILOS_ESTRICTO=0 para solo avisar).
+# El ruleset lo exige como check obligatorio (contexto "control-estilos").
+on:
+  pull_request:
+    branches: [testing, main]
+
+permissions:
+  contents: read
+
+jobs:
+  control-estilos:
+    name: control-estilos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # El rol sale de GitHub, no del nombre de la rama: Desarrollo = admin (dueño del repo).
+      # En un repo personal los colaboradores siempre tienen rol "write" → Marketing.
+      # Si la API falla, el rol queda "desconocido" y se trata como Marketing.
+      - name: Rol del autor del PR
+        id: rol
+        env:
+          GH_TOKEN: ${{ github.token }}
+          AUTOR: ${{ github.event.pull_request.user.login }}
+        run: |
+          rol=$(gh api "repos/$GITHUB_REPOSITORY/collaborators/$AUTOR/permission" --jq .role_name) || rol=desconocido
+          echo "Autor: $AUTOR · rol: $rol"
+          echo "rol=$rol" >> "$GITHUB_OUTPUT"
+
+      - name: Verificar estilos y rutas
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          DESTINO: ${{ github.base_ref }}
+          ROL: ${{ steps.rol.outputs.rol }}
+          ESTRICTO: ${{ vars.ESTILOS_ESTRICTO || '1' }}
+        run: bash scripts/verificar-estilos.sh "$BASE_SHA" "$DESTINO" "$ROL"

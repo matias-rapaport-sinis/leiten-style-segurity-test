@@ -1,0 +1,11 @@
+# Rutas que Marketing puede modificar: una regex extendida (grep -E) por línea,
+# contra la ruta relativa a la raíz del repo.
+# La usa el CI (scripts/verificar-estilos.sh). Si se cambia, actualizar también
+# .github/CODEOWNERS (y, si hace falta, el push ruleset de configuracion-github/).
+
+# Hojas de estilo: tema global y CSS aislado de cada componente (*.razor.css)
+\.css$
+
+# Imágenes y tipografías estáticas
+^src/[^/]+/wwwroot/img/
+^src/[^/]+/wwwroot/fonts/
